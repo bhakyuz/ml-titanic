@@ -23,4 +23,6 @@ def prepare_data(df, replacements):
 	final.drop('Name', axis=1, inplace=True)
 	final.drop('Ticket', axis=1, inplace=True)
 
+	final['IsMinor']=np.where(final['Age']<=16, 1, 0)
+
 	return(final)
