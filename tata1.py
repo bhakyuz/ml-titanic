@@ -7,4 +7,3 @@ with open('data/replacements.json') as f:
   replacements = json.load(f)
 
 t = prepare_data(training, replacements)
-print(t.head())

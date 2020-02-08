@@ -4,7 +4,7 @@ def get_missing_replacements(df):
 	df is pd data frame
 	'''
 	# ideally same names should be used here 
-	age = df["Age"].median(skipna=True)
-	embarked = df['Embarked'].value_counts().idxmax()
+	Age = df["Age"].median(skipna=True)
+	Embarked = df['Embarked'].value_counts().idxmax()
 
-	return({'age':age, 'embarked':embarked})
+	return({'Age':Age, 'Embarked':Embarked})

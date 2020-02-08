@@ -1,0 +1,38 @@
+```python{trick relative paths for import, echo = False}
+# https://mg.readthedocs.io/importing-local-python-modules-from-jupyter-notebooks/sys-path-in-notebook/path-notebook.html
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../ml'))
+
+```
+
+## Read data first
+```python{read data}
+import pandas as pd
+# Training data should be placed in data-raw/train.csv
+training = pd.read_csv("data-raw/train.csv")
+```
+
+## Take a look
+
+```python{first rows}
+print(training.head())
+```
+```python{info on data}
+training.info()
+```
+
+## Find missing values
+
+```python{see missing data}
+training.isnull().sum()
+
+```
+
+
+## Handle missing values
+```python{find the values to replace for missing variable}
+from ml import get_missing_replacements
+# This will be written into data/replacements.json for further use
+get_missing_replacements(training)
+```
