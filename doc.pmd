@@ -34,5 +34,31 @@ training.isnull().sum()
 ```python{find the values to replace for missing variable}
 from ml import get_missing_replacements
 # This will be written into data/replacements.json for further use
-get_missing_replacements(training)
+replacements=get_missing_replacements(training)
 ```
+### Check all the variables are missing proof.
+Even though, training data do no have missing values, it is safer to generate back-up values for each column.
+```python{any replacesment for missing values is missing }
+# Missing values are not handled for following variables:
+for i in training.keys().tolist():
+	print(i + ': ' + str(training[i].isnull().sum()) + ' missing value/s') if replacements.get(i) is None else None
+```
+
+## Results of preporcessing 
+```python{after preprocess}
+from ml.preprocess import * 
+training_preprocessed=prepare_data(training, replacements)
+# see first rows
+print(training_preprocessed.head())
+# any missing values
+training_preprocessed.isnull().sum()
+
+```
+
+## Results of preporcessing 
+```python{exploration of variables}
+# Here variables will be plotted in order to see details
+# likely with traget variable
+
+```
+

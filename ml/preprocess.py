@@ -8,9 +8,9 @@ def prepare_data(df, replacements):
 	replacements as dict
 	'''
 	df2 = df.copy()
-	# would be better if they have the same names
-	df2["Age"].fillna(replacements.get('age'), inplace=True)
-	df2["Embarked"].fillna(replacements.get('embarked'), inplace=True)
+	for i in replacements.keys():
+		df2[i].fillna(replacements.get(i), inplace=True)
+
 	df2.drop('Cabin', axis=1, inplace=True)
 	## Create categorical variable for traveling alone
 	df2['TravelAlone']=np.where((df2["SibSp"]+df2["Parch"])>0, 0, 1)
