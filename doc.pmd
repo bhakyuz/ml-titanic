@@ -89,8 +89,20 @@ with open('data/model.pickle', 'wb') as f:
 
 ```
 
+Some data splitting util should be added here before getting into the scores
+Super bad practice for now to fit all training data and test with the same data :)  
 ## 
-```python{}
+```python{predict }
+from ml.predict import * 
+from ml.measure_model import * 
+
+pred = predict(model, training_preprocessed, selected_features)
+
+measurements = measure_model(model, training_preprocessed[target_variable.get('target_variable')], pred)
+print(measurements)
+
+with open('data/measurements.json', 'w') as f:
+    json.dump(measurements, f)
 
 ```
 

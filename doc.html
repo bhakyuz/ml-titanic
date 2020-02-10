@@ -857,7 +857,29 @@ dtype: int64
   <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 
+<p>Some data splitting util should be added here before getting into the scores
+Super bad practice for now to fit all training data and test with the same data :)  </p>
 <h2></h2>
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ml.predict</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span> <span class="nn">ml.measure_model</span> <span class="kn">import</span> <span class="o">*</span> 
+
+<span class="n">pred</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">training_preprocessed</span><span class="p">,</span> <span class="n">selected_features</span><span class="p">)</span>
+
+<span class="n">measurements</span> <span class="o">=</span> <span class="n">measure_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">training_preprocessed</span><span class="p">[</span><span class="n">target_variable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;target_variable&#39;</span><span class="p">)],</span> <span class="n">pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/measurements.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">measurements</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight"><pre>
+{&#39;model&#39;: &#39;LogisticRegression&#39;, &#39;n&#39;: 891,
+&#39;accuracy_score&#39;: 0.8035914702581369,
+&#39;precision_score&#39;: 0.7684887459807074, &#39;recall_score&#39;:
+0.6988304093567251}
+</pre></div>
+
 <h2></h2>
 
     <HR/>

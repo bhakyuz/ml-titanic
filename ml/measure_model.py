@@ -8,17 +8,19 @@ def measure_model(model, expected, predicted):
 	df is pd data frame
 	'''
 	model = model.__class__.__name__
-	accuracy_score=accuracy_score(expected, predicted)
-	precision_score = precision_score(expected, predicted) 
-	recall_score = recall_score(expected, predicted)
+	n = len(expected)
+	accuracy=accuracy_score(expected, predicted)
+	precision = precision_score(expected, predicted) 
+	recall = recall_score(expected, predicted)
 	# log_loss=log_loss(y_test, y_pred_proba))
 	# auc=auc(fpr, tpr)
 
 	scores = {
-	'model':model
-	'accuracy_score':accuracy_score,
-	'precision_score':precision_score,
-	'recall_score':recall_score
+	'model':model,
+	'n':n,
+	'accuracy_score':accuracy,
+	'precision_score':precision,
+	'recall_score':recall,
 	}
 
 	return(scores)
