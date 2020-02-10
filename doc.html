@@ -768,20 +768,20 @@ dtype: int64
 
 <div class="highlight"><pre><span></span><span class="c1"># Missing values are not handled for following variables:</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">training</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
-	<span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39; missing values&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">replacements</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+	<span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39; missing value/s&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">replacements</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
 </pre></div>
 
 <div class="highlight"><pre>
-PassengerId: 0 missing values
-Survived: 0 missing values
-Pclass: 0 missing values
-Name: 0 missing values
-Sex: 0 missing values
-SibSp: 0 missing values
-Parch: 0 missing values
-Ticket: 0 missing values
-Fare: 0 missing values
-Cabin: 687 missing values
+PassengerId: 0 missing value/s
+Survived: 0 missing value/s
+Pclass: 0 missing value/s
+Name: 0 missing value/s
+Sex: 0 missing value/s
+SibSp: 0 missing value/s
+Parch: 0 missing value/s
+Ticket: 0 missing value/s
+Fare: 0 missing value/s
+Cabin: 687 missing value/s
 </pre></div>
 
 <h2>Results of preporcessing</h2>
@@ -827,6 +827,38 @@ IsMinor        0
 dtype: int64
 </pre></div>
 
+<h2>Results of preporcessing</h2>
+
+<div class="highlight"><pre><span></span><span class="c1"># Here variables will be plotted in order to see details</span>
+<span class="c1"># likely with target variable</span>
+</pre></div>
+
+<h2>Results of preporcessing</h2>
+
+<div class="highlight"><pre><span></span><span class="c1"># Here variables will be plotted in order to see details</span>
+<span class="c1"># likely with target variable</span>
+</pre></div>
+
+<h2>Train model</h2>
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ml.train_model</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">selected_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;TravelAlone&#39;</span><span class="p">,</span> <span class="s1">&#39;Pclass_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pclass_2&#39;</span><span class="p">,</span> <span class="s1">&#39;Embarked_C&#39;</span><span class="p">,</span> <span class="s1">&#39;Embarked_S&#39;</span><span class="p">,</span> <span class="s1">&#39;Sex_male&#39;</span><span class="p">,</span> <span class="s1">&#39;IsMinor&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data-raw/target_variable.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">target_variable</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">training_preprocessed</span><span class="p">,</span> <span class="n">target_variable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;target_variable&#39;</span><span class="p">),</span> <span class="n">selected_features</span><span class="p">)</span>
+
+<span class="c1"># write model in disk for further use</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/model.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+<h2></h2>
+<h2></h2>
 
     <HR/>
     <div class="footer">

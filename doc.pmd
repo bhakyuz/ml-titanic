@@ -58,7 +58,43 @@ training_preprocessed.isnull().sum()
 ## Results of preporcessing 
 ```python{exploration of variables}
 # Here variables will be plotted in order to see details
-# likely with traget variable
+# likely with target variable
 
 ```
 
+
+## Results of preporcessing 
+```python{exploration of variables}
+# Here variables will be plotted in order to see details
+# likely with target variable
+
+```
+
+## Train model
+```python{train model}
+from ml.train_model import * 
+import json
+
+selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 'Embarked_C', 'Embarked_S', 'Sex_male', 'IsMinor']
+
+with open('data-raw/target_variable.json') as f:
+  target_variable = json.load(f)
+
+model = train_model(training_preprocessed, target_variable.get('target_variable'), selected_features)
+
+# write model in disk for further use
+import pickle
+with open('data/model.pickle', 'wb') as f:
+  pickle.dump(model, f)
+
+```
+
+## 
+```python{}
+
+```
+
+## 
+```python{}
+
+```
