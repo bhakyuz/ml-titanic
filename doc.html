@@ -761,6 +761,35 @@ dtype: int64
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ml</span> <span class="kn">import</span> <span class="n">get_missing_replacements</span>
 <span class="c1"># This will be written into data/replacements.json for further use</span>
 <span class="n">replacements</span><span class="o">=</span><span class="n">get_missing_replacements</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+<span class="n">replacements</span>
+</pre></div>
+
+<div class="highlight"><pre>
+{&#39;Age&#39;: 28.0,
+ &#39;Embarked&#39;: &#39;S&#39;,
+ &#39;Pclass&#39;: 3,
+ &#39;PassengerId&#39;: 0,
+ &#39;Survived&#39;: 0,
+ &#39;Name&#39;: &#39;&#39;,
+ &#39;Sex&#39;: &#39;male&#39;,
+ &#39;SibSp&#39;: 0,
+ &#39;Parch&#39;: 0,
+ &#39;Ticket&#39;: &#39;CA. 2343&#39;,
+ &#39;Fare&#39;: 8.05,
+ &#39;Cabin&#39;: &#39;G6&#39;}
+</pre></div>
+
+
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="c1"># https://stackoverflow.com/questions/11942364/typeerror-integer-is-not-json-serializable-when-serializing-json-in-python</span>
+<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">):</span> <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>  
+    <span class="k">raise</span> <span class="ne">TypeError</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/replacements.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">replacements</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">convert</span><span class="p">)</span>
 </pre></div>
 
 <h3>Check all the variables are missing proof.</h3>
@@ -769,19 +798,6 @@ dtype: int64
 <div class="highlight"><pre><span></span><span class="c1"># Missing values are not handled for following variables:</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">training</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
 	<span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39; missing value/s&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">replacements</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-</pre></div>
-
-<div class="highlight"><pre>
-PassengerId: 0 missing value/s
-Survived: 0 missing value/s
-Pclass: 0 missing value/s
-Name: 0 missing value/s
-Sex: 0 missing value/s
-SibSp: 0 missing value/s
-Parch: 0 missing value/s
-Ticket: 0 missing value/s
-Fare: 0 missing value/s
-Cabin: 687 missing value/s
 </pre></div>
 
 <h2>Results of preporcessing</h2>
@@ -883,7 +899,7 @@ This should be after preprocess since the results of preprocess will be examined
 &#39;accuracy_score&#39;: 0.8035914702581369,
 &#39;precision_score&#39;: 0.7684887459807074, &#39;recall_score&#39;:
 0.6988304093567251, &#39;run_at&#39;:
-&#39;2020-02-16T13:21:58.667127&#39;}
+&#39;2020-02-16T15:32:57.458036&#39;}
 </pre></div>
 
 <h2></h2>

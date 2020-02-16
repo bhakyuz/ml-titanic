@@ -1,1 +1,1 @@
-{"age": 28.0, "embarked": "S"}
+{"Age": 28.0, "Embarked": "S", "Pclass": 3, "PassengerId": 0, "Survived": 0, "Name": "", "Sex": "male", "SibSp": 0, "Parch": 0, "Ticket": "CA. 2343", "Fare": 8.05, "Cabin": "G6"}
