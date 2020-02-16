@@ -96,6 +96,12 @@ Super bad practice for now to fit all training data and test with the same data 
 from ml.predict import * 
 from ml.measure_model import * 
 
+---
+**TODO**
+there should be select features function in order to choose the variables interested
+This should be after preprocess since the results of preprocess will be examined in order to decide which variables to keep
+---
+
 pred = predict(model, training_preprocessed, selected_features)
 
 measurements = measure_model(model, training_preprocessed[target_variable.get('target_variable')], pred)
