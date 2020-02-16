@@ -5,7 +5,6 @@ bleach==3.1.0
 blinker==1.4
 certifi==2018.8.24
 chardet==3.0.4
-command-not-found==0.3
 constantly==15.1.0
 cryptography==2.6.1
 cupshelpers==1.0
