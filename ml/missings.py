@@ -13,9 +13,9 @@ def get_missing_replacements(df):
 	Sex = df['Sex'].value_counts().idxmax()
 	SibSp = df['SibSp'].value_counts().idxmax()
 	Parch = df['Parch'].value_counts().idxmax()
-	Ticket = df['Ticket'].value_counts().idxmax()
+	Ticket = ''
 	Fare = df['Fare'].value_counts().idxmax()
-	Cabin = df['Cabin'].value_counts().idxmax()
+	Cabin = ''
 
 	return({'Age':Age, 
 		'Embarked':Embarked,

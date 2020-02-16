@@ -10,14 +10,14 @@ api = Api(app)
 # Example 
 # http://127.0.0.1:8000/?text=tata&toto=toktok&a=2
 
-class HelloWorld(Resource):
+class Predict(Resource):
     def get(self):
         url_params = request.args
         df = pd.DataFrame.from_records(url_params, index=[0])
         df2 = ml.prepare_data(df, ml.REPLACEMENTS)
-        return {'url_params': url_params, 'df': df.to_dict(), 'df2': df2}
+        return {'url_params': url_params, 'raw': df.to_dict(), 'preprocessed': df2.to_dict()}
         
-api.add_resource(HelloWorld, '/')
+api.add_resource(Predict, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
