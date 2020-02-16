@@ -1,0 +1,135 @@
+```python{trick relative paths for import, echo = True}
+# https://mg.readthedocs.io/importing-local-python-modules-from-jupyter-notebooks/sys-path-in-notebook/path-notebook.html
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
+
+```
+
+## Read data first
+```python{read data}
+import pandas as pd
+# Training data should be placed in data-raw/train.csv
+training = pd.read_csv("data-raw/train.csv")
+```
+
+## Take a look
+
+```python{first rows}
+print(training.head())
+```
+```python{info on data}
+training.info()
+```
+
+## Find missing values
+
+```python{see missing data}
+training.isnull().sum()
+
+```
+
+
+## Handle missing values
+```python{find the values to replace for missing variable}
+from ml import get_missing_replacements
+# This will be written into data/replacements.json for further use
+replacements=get_missing_replacements(training)
+replacements
+```
+
+```python{write missing replacement}
+import json
+import numpy
+# https://stackoverflow.com/questions/11942364/typeerror-integer-is-not-json-serializable-when-serializing-json-in-python
+def convert(o):
+    if isinstance(o, numpy.int64): return int(o)  
+    raise TypeError
+
+# with open('data/replacements.json', 'w') as f:
+#     json.dump(replacements, f, default=convert)
+```
+
+
+### Check all the variables are missing proof.
+Even though, training data do no have missing values, it is safer to generate back-up values for each column.
+```python{any replacesment for missing values is missing }
+# Missing values are not handled for following variables:
+for i in training.keys().tolist():
+	print(i + ': ' + str(training[i].isnull().sum()) + ' missing value/s') if replacements.get(i) is None else None
+```
+
+## Results of preporcessing 
+```python{after preprocess}
+from ml.preprocess import * 
+training_preprocessed=prepare_data(training, replacements)
+# see first rows
+print(training_preprocessed.head())
+# any missing values
+training_preprocessed.isnull().sum()
+
+```
+
+## Results of preporcessing 
+```python{exploration of variables}
+# Here variables will be plotted in order to see details
+# likely with target variable
+
+```
+
+
+## Results of preporcessing 
+```python{exploration of variables}
+# Here variables will be plotted in order to see details
+# likely with target variable
+
+```
+
+## Train model
+```python{train model}
+from ml.train_model import * 
+import json
+
+selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 'Embarked_C', 'Embarked_S', 'Sex_male', 'IsMinor']
+
+with open('data-raw/target_variable.json') as f:
+  target_variable = json.load(f)
+
+model = train_model(training_preprocessed, target_variable.get('target_variable'), selected_features)
+
+# write model in disk for further use
+import pickle
+with open('data/model.pickle', 'wb') as f:
+  pickle.dump(model, f)
+
+```
+
+Some data splitting util should be added here before getting into the scores
+Super bad practice for now to fit all training data and test with the same data :)  
+
+---
+**TODO**
+there should be select features function in order to choose the variables interested
+This should be after preprocess since the results of preprocess will be examined in order to decide which variables to keep
+---
+
+##  Run the model
+
+```python{predict }
+from ml.predict import * 
+from ml.measure_model import * 
+
+pred = predict(model, training_preprocessed, selected_features)
+
+measurements = measure_model(model, training_preprocessed[target_variable.get('target_variable')], pred)
+print(measurements)
+
+with open('data/measurements.json', 'w') as f:
+    json.dump(measurements, f)
+
+```
+
+## 
+```python{}
+
+```
