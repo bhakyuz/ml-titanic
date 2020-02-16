@@ -2,7 +2,7 @@
 # https://mg.readthedocs.io/importing-local-python-modules-from-jupyter-notebooks/sys-path-in-notebook/path-notebook.html
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../ml'))
+sys.path.insert(0, os.path.abspath('.'))
 
 ```
 

@@ -1,1 +1,1 @@
-{"model": "LogisticRegression", "n": 891, "accuracy_score": 0.8035914702581369, "precision_score": 0.7684887459807074, "recall_score": 0.6988304093567251, "run_at": "2020-02-16T17:40:04.806411"}
+{"model": "LogisticRegression", "n": 891, "accuracy_score": 0.8035914702581369, "precision_score": 0.7684887459807074, "recall_score": 0.6988304093567251, "run_at": "2020-02-16T19:31:52.442571"}
