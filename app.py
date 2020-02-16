@@ -14,8 +14,9 @@ class Predict(Resource):
     def get(self):
         url_params = request.args
         df = pd.DataFrame.from_records(url_params, index=[0])
-        df2 = ml.prepare_data(df, ml.REPLACEMENTS)
-        return {'url_params': url_params, 'raw': df.to_dict(), 'preprocessed': df2.to_dict()}
+        preprocessed = ml.prepare_data(df, ml.REPLACEMENTS)
+        pred = ml.predict(ml.MODEL, preprocessed, ml.SELECTED_FEATURES)
+        return {'url_params': url_params, 'raw': df.to_dict(), 'preprocessed': preprocessed.to_dict(), 'prediction': pred.tolist()}
         
 api.add_resource(Predict, '/')
 
