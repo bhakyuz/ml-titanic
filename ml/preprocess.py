@@ -9,7 +9,10 @@ def prepare_data(df, replacements):
 	'''
 	df2 = df.copy()
 	for i in replacements.keys():
-		df2[i].fillna(replacements.get(i), inplace=True)
+		if i in df.columns:
+			df2[i].fillna(replacements.get(i), inplace=True)
+		else:
+			df2[i] = replacements.get(i)
 
 	df2.drop('Cabin', axis=1, inplace=True)
 	## Create categorical variable for traveling alone
