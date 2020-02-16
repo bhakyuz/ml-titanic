@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask import request
 import pandas as pd
-
+import ml
 
 app = Flask(__name__)
 api = Api(app)
@@ -14,7 +14,8 @@ class HelloWorld(Resource):
     def get(self):
         url_params = request.args
         df = pd.DataFrame.from_records(url_params, index=[0])
-        return {'url_params': url_params, 'df': df.to_dict()}
+        df2 = ml.prepare_data(df, ml.REPLACEMENTS)
+        return {'url_params': url_params, 'df': df.to_dict(), 'df2': df2}
         
 api.add_resource(HelloWorld, '/')
 
