@@ -1,6 +1,7 @@
 # from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report, precision_score, recall_score 
 # from sklearn.metrics import confusion_matrix, precision_recall_curve, roc_curve, auc, log_loss
+import datetime 
 
 def measure_model(model, expected, predicted):
 	'''
@@ -12,6 +13,7 @@ def measure_model(model, expected, predicted):
 	accuracy=accuracy_score(expected, predicted)
 	precision = precision_score(expected, predicted) 
 	recall = recall_score(expected, predicted)
+	run_at = str(datetime.datetime.now().isoformat())
 	# log_loss=log_loss(y_test, y_pred_proba))
 	# auc=auc(fpr, tpr)
 
@@ -21,6 +23,7 @@ def measure_model(model, expected, predicted):
 	'accuracy_score':accuracy,
 	'precision_score':precision,
 	'recall_score':recall,
+	'run_at':run_at,
 	}
 
 	return(scores)
