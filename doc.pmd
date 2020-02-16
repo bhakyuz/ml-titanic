@@ -91,16 +91,18 @@ with open('data/model.pickle', 'wb') as f:
 
 Some data splitting util should be added here before getting into the scores
 Super bad practice for now to fit all training data and test with the same data :)  
-## 
-```python{predict }
-from ml.predict import * 
-from ml.measure_model import * 
 
 ---
 **TODO**
 there should be select features function in order to choose the variables interested
 This should be after preprocess since the results of preprocess will be examined in order to decide which variables to keep
 ---
+
+##  Run the model
+
+```python{predict }
+from ml.predict import * 
+from ml.measure_model import * 
 
 pred = predict(model, training_preprocessed, selected_features)
 
