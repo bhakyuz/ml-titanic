@@ -1,4 +1,4 @@
-```python{trick relative paths for import, echo = False}
+```python{trick relative paths for import, echo = True}
 # https://mg.readthedocs.io/importing-local-python-modules-from-jupyter-notebooks/sys-path-in-notebook/path-notebook.html
 import os
 import sys
@@ -46,8 +46,8 @@ def convert(o):
     if isinstance(o, numpy.int64): return int(o)  
     raise TypeError
 
-with open('data/replacements.json', 'w') as f:
-    json.dump(replacements, f, default=convert)
+# with open('data/replacements.json', 'w') as f:
+#     json.dump(replacements, f, default=convert)
 ```
 
 
