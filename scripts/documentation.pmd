@@ -38,19 +38,6 @@ replacements=get_missing_replacements(training)
 replacements
 ```
 
-```python{write missing replacement}
-import json
-import numpy
-# https://stackoverflow.com/questions/11942364/typeerror-integer-is-not-json-serializable-when-serializing-json-in-python
-def convert(o):
-    if isinstance(o, numpy.int64): return int(o)  
-    raise TypeError
-
-# with open('data/replacements.json', 'w') as f:
-#     json.dump(replacements, f, default=convert)
-```
-
-
 ### Check all the variables are missing proof.
 Even though, training data do no have missing values, it is safer to generate back-up values for each column.
 ```python{any replacesment for missing values is missing }

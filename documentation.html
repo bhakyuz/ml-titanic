@@ -785,19 +785,6 @@ dtype: int64
  &#39;Cabin&#39;: &#39;&#39;}
 </pre></div>
 
-
-
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="c1"># https://stackoverflow.com/questions/11942364/typeerror-integer-is-not-json-serializable-when-serializing-json-in-python</span>
-<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">):</span> <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>  
-    <span class="k">raise</span> <span class="ne">TypeError</span>
-
-<span class="c1"># with open(&#39;data/replacements.json&#39;, &#39;w&#39;) as f:</span>
-<span class="c1">#     json.dump(replacements, f, default=convert)</span>
-</pre></div>
-
 <h3>Check all the variables are missing proof.</h3>
 <p>Even though, training data do no have missing values, it is safer to generate back-up values for each column.</p>
 
@@ -905,16 +892,16 @@ This should be after preprocess since the results of preprocess will be examined
 &#39;accuracy_score&#39;: 0.8035914702581369,
 &#39;precision_score&#39;: 0.7684887459807074, &#39;recall_score&#39;:
 0.6988304093567251, &#39;run_at&#39;:
-&#39;2020-02-16T19:31:52.442571&#39;}
+&#39;2020-02-24T23:47:42.524720&#39;}
 </pre></div>
 
 <h2></h2>
 
     <HR/>
     <div class="footer">
-      <p>Published from <a href="doc.pmd">doc.pmd</a>
+      <p>Published from <a href="scripts/documentation.pmd">scripts/documentation.pmd</a>
     using <a href="http://mpastell.com/pweave">Pweave</a> 0.30.3
-    on 16-02-2020.<p></div>
+    on 24-02-2020.<p></div>
 
             </div>
         </div>
